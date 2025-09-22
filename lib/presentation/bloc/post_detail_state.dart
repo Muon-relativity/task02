@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import '../../core/app_exception.dart';
 import '../../domain/entities/post.dart';
 
 abstract class PostDetailState extends Equatable {
@@ -20,10 +21,10 @@ class PostDetailLoaded extends PostDetailState {
 }
 
 class PostDetailError extends PostDetailState {
-  final String message;
+  final AppException exception;
 
-  PostDetailError(this.message);
+  PostDetailError(this.exception);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [exception];
 }

@@ -16,13 +16,12 @@ class PostListCubit extends Cubit<PostListState> {
       emit(PostListLoaded(posts));
     } on DioException catch (e) {
       if (e.error is AppException) {
-        final appError = e.error as AppException;
-        emit(PostListError('${appError.code}: ${appError.message}'));
+        emit(PostListError(e.error as AppException));
       } else {
-        emit(PostListError(e.message ?? '알 수 없는 네트워크 오류'));
+        emit(PostListError(AppException(message: e.message ?? '알 수 없는 네트워크 오류', code: -1)));
       }
     } catch (e) {
-      emit(PostListError(e.toString()));
+      emit(PostListError(AppException(message: e.toString(), code: -1)));
     }
   }
 }

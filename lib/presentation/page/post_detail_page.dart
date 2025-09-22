@@ -41,7 +41,9 @@ class PostDetailPage extends StatelessWidget {
               ),
             );
           } else if (state is PostDetailError) {
-            return Center(child: Text("Error: ${state.message}"));
+            return Center(
+              child: Text("Error [${state.exception.runtimeType}]: ${state.exception.message}"),
+            );
           } else {
             return const Center(child: Text("Unknown state"));
           }

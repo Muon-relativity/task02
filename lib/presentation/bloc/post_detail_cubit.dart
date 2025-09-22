@@ -17,13 +17,12 @@ class PostDetailCubit extends Cubit<PostDetailState> {
       emit(PostDetailLoaded(post));
     } on DioException catch (e) {
       if (e.error is AppException) {
-        final appError = e.error as AppException;
-        emit(PostDetailError('${appError.code}: ${appError.message}'));
+        emit(PostDetailError(e.error as AppException));
       } else {
-        emit(PostDetailError(e.message ?? '알 수 없는 네트워크 오류'));
+        emit(PostDetailError(AppException(message: e.message ?? '알 수 없는 네트워크 오류', code: -1)));
       }
     } catch (e) {
-      emit(PostDetailError(e.toString()));
+      emit(PostDetailError(AppException(message: e.toString(), code: -1)));
     }
   }
 }

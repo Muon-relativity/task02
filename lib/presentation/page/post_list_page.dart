@@ -47,7 +47,9 @@ class PostListPageState extends State<PostListPage> {
               separatorBuilder: (_, __) => const Divider(),
             );
           } else if (state is PostListError) {
-            return Center(child: Text("Error: ${state.message}"));
+            return Center(
+              child: Text("Error [${state.exception.runtimeType}]: ${state.exception.message}"),
+            );
           } else {
             return const Center(child: CircularProgressIndicator());
           }
